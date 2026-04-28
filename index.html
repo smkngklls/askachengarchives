@@ -1,17 +1,24 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>arsip-pesan-anonim</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
 body {
   margin: 0;
   font-family: -apple-system, sans-serif;
-  background: #000; /* hitam */
-  text-align: center;
+  background: #000;
   color: white;
 }
 
 /* HEADER */
-h1 {
+.header {
+  background: #a00000;
   padding: 15px;
-  margin: 0;
-  background: #a00000; /* merah gelap */
-  color: white;
+  font-size: 20px;
+  font-weight: bold;
   text-align: left;
 }
 
@@ -37,24 +44,114 @@ iframe {
   width: 100%;
   height: 80vh;
   border: none;
-  background: #fff;
+  background: white;
 }
 
 /* NAV */
 .nav {
   padding: 10px;
   background: #111;
+  text-align: center;
 }
 
-button {
+.nav button {
   padding: 10px 15px;
   margin: 5px;
   border: none;
-  background: #a00000; /* merah */
+  background: #a00000;
   color: white;
   border-radius: 8px;
 }
 
-button:disabled {
+.nav button:disabled {
   opacity: 0.4;
 }
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  arsip-pesan-anonim
+</div>
+
+<!-- MENU -->
+<div class="menu">
+  <button onclick="setMode('retro')">arsip-retrospring</button>
+  <button onclick="setMode('secreto')">arsip-secreto</button>
+  <button onclick="setMode('cc')">arsip-cc</button>
+</div>
+
+<!-- VIEW -->
+<iframe id="viewer"></iframe>
+
+<!-- NAV -->
+<div class="nav" id="nav">
+  <button id="prevBtn" onclick="prev()">⬅ Prev</button>
+  <span id="page"></span>
+  <button id="nextBtn" onclick="next()">Next ➡</button>
+</div>
+
+<script>
+let current = 1;
+let start = 1;
+let end = 31;
+
+// SET MODE
+function setMode(mode) {
+  if (mode === "retro") {
+    start = 1;
+    end = 31;
+  }
+  if (mode === "secreto") {
+    start = 32;
+    end = 34;
+  }
+  if (mode === "cc") {
+    start = 35;
+    end = 35;
+  }
+
+  current = start;
+  update();
+}
+
+// UPDATE
+function update() {
+  document.getElementById("viewer").src = current + "retro.html";
+  document.getElementById("page").textContent = current;
+
+  document.getElementById("prevBtn").disabled = current === start;
+  document.getElementById("nextBtn").disabled = current === end;
+
+  // sembunyikan nav kalau cuma 1 halaman
+  if (start === end) {
+    document.getElementById("nav").style.display = "none";
+  } else {
+    document.getElementById("nav").style.display = "block";
+  }
+}
+
+// NEXT
+function next() {
+  if (current < end) {
+    current++;
+    update();
+  }
+}
+
+// PREV
+function prev() {
+  if (current > start) {
+    current--;
+    update();
+  }
+}
+
+// default
+setMode("retro");
+</script>
+
+</body>
+</html>
