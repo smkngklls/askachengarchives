@@ -19,14 +19,12 @@ h1 {
   font-weight:normal;
 }
 
-/* isi halaman */
 iframe {
   width:100%;
   height:60vh;
   border:none;
 }
 
-/* nav */
 .nav a {
   margin:5px;
   padding:6px 10px;
@@ -41,7 +39,6 @@ iframe {
   margin:10px 0;
 }
 
-/* HOME */
 .home-button {
   position:fixed;
   bottom:20px;
@@ -77,22 +74,30 @@ iframe {
 </a>
 
 <script>
-let page = 1;
+// ambil page dari URL (?p=)
+let params = new URLSearchParams(window.location.search);
+let page = parseInt(params.get("p")) || 1;
+
 const total = 31;
 
-function render(){
+// validasi biar tidak keluar range
+if (page < 1) page = 1;
+if (page > total) page = total;
+
+function render() {
+  // tampilkan file
   document.getElementById("frame").src = page + "retro.html";
 
   let html = "";
 
-  if(page > 1){
-    html += `<a onclick="page--;render()">Prev</a>`;
+  if (page > 1) {
+    html += `<a href="?p=${page-1}">Prev</a>`;
   }
 
   html += `<span>${page} / ${total}</span>`;
 
-  if(page < total){
-    html += `<a onclick="page++;render()">Next</a>`;
+  if (page < total) {
+    html += `<a href="?p=${page+1}">Next</a>`;
   }
 
   document.getElementById("nav").innerHTML = html;
