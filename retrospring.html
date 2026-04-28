@@ -6,35 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body { margin:0; font-family:-apple-system; background:#f5f5f5; text-align:center; }
-h1 { padding:15px; font-size:1em; font-weight:normal; }
-.content { padding:20px; }
+body{margin:0;font-family:-apple-system;background:#f5f5f5;text-align:center;}
+h1{padding:15px;font-size:1em;font-weight:normal;}
+.nav a{margin:5px;padding:6px 10px;background:black;color:white;border-radius:4px;text-decoration:none;}
+.nav span{display:block;margin:10px 0;}
 
-.nav a {
-  margin:0 5px;
-  padding:6px 10px;
-  background:black;
-  color:white;
-  border-radius:4px;
-  text-decoration:none;
+.home-button{
+position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+width:50px;height:50px;display:flex;align-items:center;justify-content:center;
+background:black;border-radius:50%;
 }
-
-.nav span { display:block; margin:10px 0; }
-
-.home-button {
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  width:50px;
-  height:50px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:black;
-  border-radius:50%;
-}
-.home-button svg { fill:white; }
+.home-button svg{fill:white;}
 </style>
 </head>
 
@@ -42,7 +24,6 @@ h1 { padding:15px; font-size:1em; font-weight:normal; }
 
 <h1>arsip-retrospring</h1>
 
-<div class="content" id="content"></div>
 <div class="nav" id="nav"></div>
 
 <a href="index.html" class="home-button">
@@ -50,20 +31,31 @@ h1 { padding:15px; font-size:1em; font-weight:normal; }
 </a>
 
 <script>
-let page = 1;
-const total = 31;
+let page = new URLSearchParams(location.search).get('p') || 1;
+page = parseInt(page);
 
-function render() {
-  document.getElementById("content").innerHTML = "Halaman " + page;
+const start = 1;
+const end = 31;
 
-  let html = "";
-  if (page > 1) html += `<a onclick="page--;render()">Prev</a>`;
-  html += `<span>${page} / ${total}</span>`;
-  if (page < total) html += `<a onclick="page++;render()">Next</a>`;
+let html = "";
 
-  document.getElementById("nav").innerHTML = html;
+// prev
+if(page > 1){
+  html += `<a href="?p=${page-1}">Prev</a>`;
 }
-render();
+
+// nomor
+html += `<span>${page} / 31</span>`;
+
+// next
+if(page < 31){
+  html += `<a href="?p=${page+1}">Next</a>`;
+}
+
+document.getElementById("nav").innerHTML = html;
+
+// 🔥 redirect ke file asli
+location.href = page + "retro.html";
 </script>
 
 </body>
