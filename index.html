@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<title>arsip-pesan-anonim</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
 body {
   margin: 0;
   font-family: -apple-system, sans-serif;
-  background: #f5f5f5;
+  background: #000; /* hitam */
   text-align: center;
+  color: white;
 }
 
+/* HEADER */
 h1 {
   padding: 15px;
   margin: 0;
+  background: #a00000; /* merah gelap */
+  color: white;
+  text-align: left;
 }
 
 /* MENU */
@@ -24,34 +21,36 @@ h1 {
   justify-content: center;
   gap: 10px;
   padding: 10px;
+  background: #111;
 }
 
 .menu button {
   padding: 10px 15px;
-  border: none;
-  background: black;
+  border: 1px solid #333;
+  background: #1a1a1a;
   color: white;
   border-radius: 8px;
 }
 
-/* VIEWER */
+/* VIEW */
 iframe {
   width: 100%;
   height: 80vh;
   border: none;
-  background: white;
+  background: #fff;
 }
 
 /* NAV */
 .nav {
   padding: 10px;
+  background: #111;
 }
 
 button {
   padding: 10px 15px;
   margin: 5px;
   border: none;
-  background: black;
+  background: #a00000; /* merah */
   color: white;
   border-radius: 8px;
 }
@@ -59,92 +58,3 @@ button {
 button:disabled {
   opacity: 0.4;
 }
-</style>
-</head>
-
-<body>
-
-<h1>arsip-pesan-anonim</h1>
-
-<!-- MENU -->
-<div class="menu">
-  <button onclick="setMode('retro')">arsip-retrospring</button>
-  <button onclick="setMode('secreto')">arsip-secreto</button>
-  <button onclick="setMode('cc')">arsip-cc</button>
-</div>
-
-<!-- VIEW -->
-<iframe id="viewer"></iframe>
-
-<!-- NAV -->
-<div class="nav" id="nav">
-  <button id="prevBtn" onclick="prev()">⬅ Prev</button>
-  <span id="page"></span>
-  <button id="nextBtn" onclick="next()">Next ➡</button>
-</div>
-
-<script>
-let current = 1;
-let start = 1;
-let end = 31;
-
-// SET MODE
-function setMode(mode) {
-  if (mode === "retro") {
-    start = 1;
-    end = 31;
-  }
-  if (mode === "secreto") {
-    start = 32;
-    end = 34;
-  }
-  if (mode === "cc") {
-    start = 35;
-    end = 35;
-  }
-
-  current = start;
-  update();
-}
-
-// UPDATE VIEW
-function update() {
-  document.getElementById("viewer").src = current + "retro.html";
-  document.getElementById("page").textContent = current;
-
-  // tombol prev
-  document.getElementById("prevBtn").disabled = current === start;
-
-  // tombol next
-  document.getElementById("nextBtn").disabled = current === end;
-
-  // kalau cuma 1 halaman → sembunyikan nav
-  if (start === end) {
-    document.getElementById("nav").style.display = "none";
-  } else {
-    document.getElementById("nav").style.display = "block";
-  }
-}
-
-// NEXT
-function next() {
-  if (current < end) {
-    current++;
-    update();
-  }
-}
-
-// PREV
-function prev() {
-  if (current > start) {
-    current--;
-    update();
-  }
-}
-
-// default load
-setMode("retro");
-</script>
-
-</body>
-</html>
