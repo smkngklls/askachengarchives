@@ -13,13 +13,14 @@ body {
   scroll-behavior: smooth;
 }
 
-/* HEADER KECIL */
+/* HEADER = kecil (ikut teks) */
 h1, h2, h3, h4, h5, h6 {
   font-size: 1em;
   font-weight: normal;
   margin: 0;
 }
 
+/* TEXT */
 p {
   font-size: 0.95em;
   margin: 5px 0;
@@ -73,13 +74,13 @@ section {
   justify-content: center;
   border-radius: 50%;
   text-decoration: none;
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.85);
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
-/* 🔥 HIDDEN STATE */
+/* HIDDEN STATE */
 .home-button.hide {
   opacity: 0;
   pointer-events: none;
@@ -100,9 +101,10 @@ section {
   <p>Halaman utama</p>
 </section>
 
-<!-- SECTION A -->
+<!-- ===== SECTION A ===== -->
 <section id="a1" class="page">
   <h1>Bagian A</h1>
+
   <div class="nav-btn">
     <span>1 / 2</span>
     <a href="#a2">Next</a>
@@ -111,8 +113,28 @@ section {
 
 <section id="a2" class="page">
   <h1>Bagian A</h1>
+
   <div class="nav-btn">
     <a href="#a1">Prev</a>
+    <span>2 / 2</span>
+  </div>
+</section>
+
+<!-- ===== SECTION B (RESET) ===== -->
+<section id="b1" class="page">
+  <h1>Bagian B</h1>
+
+  <div class="nav-btn">
+    <span>1 / 2</span>
+    <a href="#b2">Next</a>
+  </div>
+</section>
+
+<section id="b2" class="page">
+  <h1>Bagian B</h1>
+
+  <div class="nav-btn">
+    <a href="#b1">Prev</a>
     <span>2 / 2</span>
   </div>
 </section>
@@ -124,23 +146,27 @@ section {
   </svg>
 </a>
 
+<!-- SCRIPT AUTO HIDE (AKURAT) -->
 <script>
-const homeSection = document.getElementById("home");
 const homeBtn = document.getElementById("homeBtn");
+const homeSection = document.getElementById("home");
 
-function checkHome() {
-  const rect = homeSection.getBoundingClientRect();
-
-  // kalau home terlihat di layar (atasnya <= 0 dan bawahnya masih ada)
-  if (rect.top >= 0 && rect.bottom > 100) {
-    homeBtn.classList.add("hide");
-  } else {
-    homeBtn.classList.remove("hide");
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        homeBtn.classList.add("hide");
+      } else {
+        homeBtn.classList.remove("hide");
+      }
+    });
+  },
+  {
+    threshold: 0.6
   }
-}
+);
 
-window.addEventListener("scroll", checkHome);
-window.addEventListener("load", checkHome);
+observer.observe(homeSection);
 </script>
 
 </body>
