@@ -6,41 +6,104 @@
 <title>arsip-retrospring</title>
 
 <style>
-/* ===== RESET ===== */
 body {
   margin: 0;
-  padding: 0;
+  background: #000;
+  font-family: Arial, sans-serif;
 }
 
-/* ===== HAPUS BAGIAN YANG TIDAK DIINGINKAN ===== */
-
-/* HAPUS TEKS BIO (TAPI BOX TETAP ADA) */
-.profile-card p,
-.profile-card .bio {
-  visibility: hidden;
+/* container utama */
+.container {
+  max-width: 500px;
+  margin: auto;
+  background: #000;
 }
 
-/* HAPUS LINK + ICON BUMI */
-.profile-card a,
-.profile-card svg,
-.profile-card i {
-  display: none !important;
+/* header merah */
+.header {
+  background: #a40000;
+  color: white;
+  padding: 15px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* card profil */
+.profile {
+  background: #eee;
+  margin: 15px;
+  border-radius: 12px;
+  padding: 15px;
+}
+
+/* nama */
+.name {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* username */
+.username {
+  color: #a40000;
+}
+
+/* BIO DIKOSONGKAN */
+.bio {
+  display: none;
+}
+
+/* HAPUS LINK & ICON */
+.profile a,
+.profile svg,
+.profile i {
+  display: none;
 }
 
 /* HAPUS ASK BOX */
+.ask-box,
 form,
 textarea,
 input,
-.ask-box,
-button[type="submit"] {
-  display: none !important;
+button {
+  display: none;
 }
 
 /* HAPUS LOAD MORE */
-button,
-.load-more,
-a[href*="more"] {
-  display: none !important;
+.load-more {
+  display: none;
+}
+
+/* section answer */
+.section {
+  background: #fff;
+  margin: 15px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* header answer */
+.section-header {
+  background: #a40000;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+/* item */
+.item {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.question {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.answer {
+  background: #f2f2f2;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 </style>
@@ -48,36 +111,37 @@ a[href*="more"] {
 
 <body>
 
-<!-- ===== ISI ASLI HTML KAMU ===== -->
-<!-- PASTE SELURUH ISI FILE RETROSPRING KAMU DI SINI -->
-<!-- (mulai dari header retrospring sampai list Q&A) -->
+<div class="container">
 
+  <!-- HEADER -->
+  <div class="header">Retrospring</div>
 
-<script>
-window.addEventListener("load", function () {
+  <!-- PROFILE -->
+  <div class="profile">
+    <div class="name">ACHENG</div>
+    <div class="username">doinglaundry_</div>
 
-  // Kosongkan bio (tanpa hapus box)
-  document.querySelectorAll(".profile-card p").forEach(el => {
-    el.innerText = "";
-  });
+    <!-- BIO DIKOSONGKAN -->
+    <div class="bio"></div>
+  </div>
 
-  // Hapus link + icon bumi
-  document.querySelectorAll(".profile-card a, .profile-card svg, .profile-card i")
-    .forEach(el => el.remove());
+  <!-- ANSWERS -->
+  <div class="section">
+    <div class="section-header">Answers</div>
 
-  // Hapus ask box
-  document.querySelectorAll("form, textarea, input, .ask-box")
-    .forEach(el => el.remove());
+    <div class="item">
+      <div class="question">gtau</div>
+      <div class="answer">Sama.</div>
+    </div>
 
-  // Hapus tombol load more
-  document.querySelectorAll("button, a").forEach(el => {
-    if (el.innerText.toLowerCase().includes("load")) {
-      el.remove();
-    }
-  });
+    <div class="item">
+      <div class="question">Wkwkwk baca ulang kumpulan Luzo mu sampe 10 kali</div>
+      <div class="answer">Thanks ya 🤍</div>
+    </div>
 
-});
-</script>
+  </div>
+
+</div>
 
 </body>
 </html>
