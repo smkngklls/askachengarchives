@@ -139,17 +139,25 @@ fetch(page + "retro.html")
     }
   });
 
-  /* 🔥 HAPUS LINK BIO + ICON BUMI */
+  /* 🔥 HAPUS LINK + ICON BUMI (FIX TOTAL) */
   content.querySelectorAll("a").forEach(a=>{
-    if(a.href.includes("tellonym") || a.innerText.includes("tellonym")){
+    if(a.href.includes("tellonym") || a.innerText.toLowerCase().includes("tellonym")){
       a.remove();
     }
   });
 
-  /* 🔥 HAPUS SVG KECIL SISA (ICON BUMI) */
+  /* 🔥 HAPUS SVG YANG ADA DI DALAM LINK BIO */
+  content.querySelectorAll("a svg, a img").forEach(el=>{
+    let parentLink = el.closest("a");
+    if(parentLink && parentLink.href.includes("tellonym")){
+      parentLink.remove();
+    }
+  });
+
+  /* 🔥 CADANGAN: HAPUS SVG YANG DEKAT TEKS KOSONG (ICON BUMI) */
   content.querySelectorAll("svg").forEach(svg=>{
-    let txt = svg.parentElement.innerText.trim();
-    if(txt === "" || txt === "tellonym.me"){
+    let parent = svg.parentElement;
+    if(parent && parent.innerText.trim() === ""){
       svg.remove();
     }
   });
@@ -160,7 +168,7 @@ fetch(page + "retro.html")
     if(box) box.remove();
   });
 
-  /* backup kalau masih ada */
+  /* backup */
   content.querySelectorAll("div").forEach(div=>{
     if(div.innerText.trim() === "Ask something!"){
       div.remove();
