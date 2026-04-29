@@ -10,7 +10,7 @@
 body{
   margin:0;
   font-family:-apple-system;
-  background:#000; /* sesuai tampilan kamu */
+  background:#000;
 }
 
 h1{
@@ -124,7 +124,7 @@ if(page < 1) page = 1;
 if(page > total) page = total;
 
 /* =========================
-   LOAD + CLEAN
+   LOAD + CLEAN UI
 ========================= */
 fetch(page + "retro.html")
 .then(r => r.text())
@@ -132,10 +132,11 @@ fetch(page + "retro.html")
   const content = document.getElementById("content");
   content.innerHTML = data;
 
-  /* 🔥 HAPUS BIO (link tellonym) */
-  content.querySelectorAll("a[href*='tellonym']").forEach(el=>{
-    const box = el.closest("div");
-    if(box) box.remove();
+  /* 🔥 KOSONGKAN BIO (teks saja) */
+  content.querySelectorAll("p").forEach(p=>{
+    if(p.innerText.includes("Pesannya kirim")){
+      p.innerText = "";
+    }
   });
 
   /* 🔥 HAPUS KOTAK ASK */
@@ -144,16 +145,18 @@ fetch(page + "retro.html")
     if(box) box.remove();
   });
 
+  /* backup kalau masih ada */
+  content.querySelectorAll("div").forEach(div=>{
+    if(div.innerText.trim() === "Ask something!"){
+      div.remove();
+    }
+  });
+
   /* 🔥 HAPUS LOAD MORE */
   content.querySelectorAll("button").forEach(btn=>{
     if(btn.innerText.toLowerCase().includes("load")){
       btn.remove();
     }
-  });
-
-  /* 🔥 HAPUS FOOTER */
-  content.querySelectorAll("footer").forEach(el=>{
-    el.remove();
   });
 
 });
