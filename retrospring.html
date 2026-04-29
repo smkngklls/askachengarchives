@@ -3,145 +3,189 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>arsip-retrospring</title>
 
 <style>
-body {
-  margin: 0;
-  background: #000;
-  font-family: Arial, sans-serif;
+body{
+  margin:0;
+  font-family:-apple-system;
+  background:#000;
 }
 
-/* container utama */
-.container {
-  max-width: 500px;
-  margin: auto;
-  background: #000;
+h1{
+  font-size:1em;
+  font-weight:normal;
+  text-align:center;
+  margin:0;
+  padding:8px 0;
+  color:#fff;
 }
 
-/* header merah */
-.header {
-  background: #a40000;
-  color: white;
-  padding: 15px;
-  font-size: 22px;
-  font-weight: bold;
+.content{
+  padding:0;
 }
 
-/* card profil */
-.profile {
-  background: #eee;
-  margin: 15px;
-  border-radius: 12px;
-  padding: 15px;
+#content img{
+  max-width:100%;
+  height:auto;
 }
 
-/* nama */
-.name {
-  font-weight: bold;
-  font-size: 20px;
+/* NAV BAWAH */
+.bottom-bar{
+  position:fixed;
+  bottom:20px;
+  left:0;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 20px;
+  box-sizing:border-box;
 }
 
-/* username */
-.username {
-  color: #a40000;
+.home{
+  width:50px;
+  height:50px;
+  background:black;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-/* BIO DIKOSONGKAN */
-.bio {
-  display: none;
+.home svg{fill:white;}
+
+.nav-buttons{
+  display:flex;
+  gap:10px;
 }
 
-/* HAPUS LINK & ICON */
-.profile a,
-.profile svg,
-.profile i {
-  display: none;
+.arrow{
+  width:45px;
+  height:45px;
+  background:black;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-/* HAPUS ASK BOX */
-.ask-box,
-form,
-textarea,
-input,
-button {
-  display: none;
+.arrow svg{
+  fill:none;
+  stroke:white;
+  stroke-width:3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
 }
 
-/* HAPUS LOAD MORE */
-.load-more {
-  display: none;
+.page-number{
+  position:fixed;
+  bottom:80px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#fff;
 }
-
-/* section answer */
-.section {
-  background: #fff;
-  margin: 15px;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-/* header answer */
-.section-header {
-  background: #a40000;
-  color: white;
-  padding: 10px;
-  text-align: center;
-}
-
-/* item */
-.item {
-  padding: 15px;
-  border-bottom: 1px solid #ddd;
-}
-
-.question {
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.answer {
-  background: #f2f2f2;
-  padding: 10px;
-  border-radius: 8px;
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<h1>arsip-retrospring</h1>
 
-  <!-- HEADER -->
-  <div class="header">Retrospring</div>
+<div class="content" id="content">Loading...</div>
 
-  <!-- PROFILE -->
-  <div class="profile">
-    <div class="name">ACHENG</div>
-    <div class="username">doinglaundry_</div>
+<div class="page-number" id="pageNum"></div>
 
-    <!-- BIO DIKOSONGKAN -->
-    <div class="bio"></div>
-  </div>
+<div class="bottom-bar">
 
-  <!-- ANSWERS -->
-  <div class="section">
-    <div class="section-header">Answers</div>
+<!-- HOME -->
+<a href="index.html" class="home">
+<svg viewBox="0 0 24 24" width="22">
+<path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3z"/>
+</svg>
+</a>
 
-    <div class="item">
-      <div class="question">gtau</div>
-      <div class="answer">Sama.</div>
-    </div>
-
-    <div class="item">
-      <div class="question">Wkwkwk baca ulang kumpulan Luzo mu sampe 10 kali</div>
-      <div class="answer">Thanks ya 🤍</div>
-    </div>
-
-  </div>
+<!-- NAV -->
+<div class="nav-buttons" id="nav"></div>
 
 </div>
+
+<script>
+
+/* =========================
+   PAGINATION
+========================= */
+let params = new URLSearchParams(location.search);
+let page = parseInt(params.get("p")) || 1;
+const total = 31;
+
+if(page < 1) page = 1;
+if(page > total) page = total;
+
+/* =========================
+   LOAD + CLEAN UI
+========================= */
+fetch(page + "retro.html")
+.then(r => r.text())
+.then(data => {
+  const content = document.getElementById("content");
+  content.innerHTML = data;
+
+  /* 🔥 KOSONGKAN BIO (teks saja) */
+  content.querySelectorAll("p").forEach(p=>{
+    if(p.innerText.includes("Pesannya kirim")){
+      p.innerText = "";
+    }
+  });
+
+  /* 🔥 HAPUS KOTAK ASK */
+  content.querySelectorAll("textarea, input").forEach(el=>{
+    const box = el.closest("div");
+    if(box) box.remove();
+  });
+
+  /* backup kalau masih ada */
+  content.querySelectorAll("div").forEach(div=>{
+    if(div.innerText.trim() === "Ask something!"){
+      div.remove();
+    }
+  });
+
+  /* 🔥 HAPUS LOAD MORE */
+  content.querySelectorAll("button").forEach(btn=>{
+    if(btn.innerText.toLowerCase().includes("load")){
+      btn.remove();
+    }
+  });
+
+});
+
+/* =========================
+   PAGE NUMBER
+========================= */
+document.getElementById("pageNum").innerText = page + " / " + total;
+
+/* =========================
+   NAV BUTTON
+========================= */
+let nav = "";
+
+if(page > 1){
+nav += `<a href="?p=${page-1}" class="arrow">
+<svg viewBox="0 0 24 24"><path d="M14 6l-6 6 6 6"/></svg>
+</a>`;
+}
+
+if(page < total){
+nav += `<a href="?p=${page+1}" class="arrow">
+<svg viewBox="0 0 24 24"><path d="M10 6l6 6-6 6"/></svg>
+</a>`;
+}
+
+document.getElementById("nav").innerHTML = nav;
+
+</script>
 
 </body>
 </html>
