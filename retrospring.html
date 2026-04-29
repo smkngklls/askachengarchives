@@ -26,7 +26,6 @@ h1{
   padding:0;
 }
 
-/* biar isi full ikut html asli */
 #content img{
   max-width:100%;
   height:auto;
@@ -87,18 +86,6 @@ h1{
   transform:translateX(-50%);
   color:#fff;
 }
-
-/* 🔥 SEMBUNYIKAN BIO + LINK */
-a[href*="tellonym"],
-a[href*="http"]{
-  display:none !important;
-}
-
-/* 🔥 HAPUS AREA BIO */
-[class*="bio"],
-[class*="about"]{
-  display:none !important;
-}
 </style>
 </head>
 
@@ -137,7 +124,7 @@ if(page < 1) page = 1;
 if(page > total) page = total;
 
 /* =========================
-   LOAD + CLEAN UI
+   LOAD FILE
 ========================= */
 fetch(page + "retro.html")
 .then(r => r.text())
@@ -145,30 +132,14 @@ fetch(page + "retro.html")
   const content = document.getElementById("content");
   content.innerHTML = data;
 
-  /* 🔥 HAPUS TEKS BIO */
-  content.querySelectorAll("p").forEach(p=>{
-    if(p.innerText.includes("Pesannya kirim")){
-      p.remove();
-    }
+  /* 🔥 HAPUS LINK TELLONYM */
+  content.querySelectorAll('a[href*="tellonym.me"]').forEach(el=>{
+    el.remove();
   });
 
-  /* 🔥 HAPUS KOTAK ASK */
-  content.querySelectorAll("textarea, input").forEach(el=>{
-    const box = el.closest("div");
-    if(box) box.remove();
-  });
-
-  content.querySelectorAll("div").forEach(div=>{
-    if(div.innerText.trim() === "Ask something!"){
-      div.remove();
-    }
-  });
-
-  /* 🔥 HAPUS LOAD MORE */
-  content.querySelectorAll("button").forEach(btn=>{
-    if(btn.innerText.toLowerCase().includes("load")){
-      btn.remove();
-    }
+  /* 🔥 HAPUS IKON BUMI (svg di dalam link) */
+  content.querySelectorAll('a svg').forEach(el=>{
+    el.remove();
   });
 
 });
