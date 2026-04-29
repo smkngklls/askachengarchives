@@ -2,96 +2,69 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Q&A Archive</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arsip Q&A</title>
 
 <style>
 body {
   margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background: #f2f3f7;
+  font-family: Arial, sans-serif;
+  background: #eef5ff;
 }
 
-/* ===== HEADER ===== */
-.topbar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-  background: white;
-  border-bottom: 1px solid #eee;
-}
-
-.center {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logo-svg {
-  width: 22px;
-  height: 22px;
-}
-
-.logo-text {
-  font-size: 20px;
-  font-weight: 600;
-  color: #222;
-}
-
-/* ===== CONTAINER ===== */
-.container {
-  max-width: 500px;
-  margin: auto;
-  padding: 12px;
-}
-
-/* ===== Q&A STYLE ===== */
-.card {
-  margin-bottom: 16px;
-}
-
-.anon {
-  font-size: 13px;
-  color: #999;
-  margin-bottom: 6px;
-  padding-left: 6px;
-}
-
-.question {
-  background: #e9e9ec;
-  padding: 12px 14px;
-  border-radius: 16px;
-  font-size: 14px;
-  color: #333;
-  line-height: 1.4;
-}
-
-.answer {
-  margin-top: 8px;
-  background: linear-gradient(45deg, #ff3b6b, #ff5c8a);
+/* HEADER NGAMBANG */
+.header {
+  background: linear-gradient(135deg, #6ea8ff, #3d7bfd);
   color: white;
-  padding: 12px 14px;
+  text-align: center;
+  padding: 16px;
+  font-weight: bold;
+  font-size: 18px;
+
+  margin: 16px;
   border-radius: 16px;
-  font-size: 14px;
-  line-height: 1.4;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* CONTAINER */
+.container {
+  padding: 4px;
+}
+
+/* AUTO STYLE UNTUK Q&A LAMA */
+.card, .post, .item, .box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 14px;
+  margin: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border-left: 4px solid #3d7bfd;
+}
+
+/* QUESTION */
+.question, .ask {
+  font-weight: bold;
+  color: #2c5edb;
+  margin-bottom: 8px;
+}
+
+/* ANSWER */
+.answer, .reply {
+  color: #333;
+  line-height: 1.5;
+}
+
+/* SEMBUNYIKAN TANGGAL */
+.date, .time, small, .timestamp {
+  display: none !important;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="topbar">
-  <div class="center">
-    <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M6 3h12v15l-6 3-6-3V3z"></path>
-      <circle cx="9" cy="10" r="1"></circle>
-      <circle cx="15" cy="10" r="1"></circle>
-      <path d="M9 14c1.5 1 3.5 1 6 0"></path>
-    </svg>
-    <span class="logo-text">arsip-tellonym</span>
-  </div>
+<div class="header">
+arsip.tellonym
 </div>
 
 <div class="container">
