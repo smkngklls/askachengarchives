@@ -8,7 +8,7 @@
 <style>
 body {
   margin: 0;
-  background: #008080;
+  background: #3a6ea5; /* XP-ish blue */
   font-family: Tahoma, sans-serif;
   display: flex;
   justify-content: center;
@@ -18,56 +18,80 @@ body {
 
 /* WINDOW */
 .window {
-  width: 380px;
-  background: #c0c0c0;
-  border: 2px solid #000;
-  box-shadow: 3px 3px #000;
+  width: 460px;
+  background: #ece9d8;
+  border: 1px solid #000;
 }
 
 /* TITLE BAR */
 .title-bar {
-  background: linear-gradient(to right, #000080, #1084d0);
+  background: linear-gradient(to right, #0a246a, #3a6ea5);
   color: white;
-  padding: 3px 6px;
+  padding: 4px 6px;
   font-size: 13px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .title-bar span {
   font-weight: bold;
 }
 
+/* MENU BAR */
+.menu {
+  background: #ece9d8;
+  border-bottom: 1px solid #aca899;
+  font-size: 12px;
+  padding: 2px 6px;
+}
+
+.menu span {
+  margin-right: 12px;
+}
+
 /* BODY */
 .window-body {
   background: white;
-  padding: 10px;
+  padding: 6px;
 }
 
-/* GRID */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-/* FILE */
+/* FILE LIST */
 .file {
-  text-align: center;
-  font-size: 12px;
-  cursor: pointer;
-  color: black;
+  display: flex;
+  align-items: center;
+  padding: 4px 6px;
+  font-size: 13px;
   text-decoration: none;
+  color: black;
 }
 
-.file div {
-  font-size: 32px;
+/* FOLDER ICON */
+.file::before {
+  content: "";
+  width: 16px;
+  height: 12px;
+  background: #f4d36b;
+  border: 1px solid #caa24a;
+  margin-right: 8px;
 }
 
-/* CLICK EFFECT */
-.file:active {
-  background: #000080;
+/* HOVER */
+.file:hover {
+  background: #316ac5;
   color: white;
+}
+
+/* STATUS BAR */
+.status {
+  display: flex;
+  border-top: 1px solid #aca899;
+  font-size: 11px;
+}
+
+.status div {
+  flex: 1;
+  padding: 2px 6px;
 }
 </style>
 </head>
@@ -78,35 +102,30 @@ body {
 
   <div class="title-bar">
     <span>askacheng.archives</span>
-    <div>🗕 🗖 ✕</div>
+    <div>— □ ✕</div>
+  </div>
+
+  <div class="menu">
+    <span>File</span>
+    <span>Edit</span>
+    <span>View</span>
+    <span>Favorites</span>
+    <span>Tools</span>
+    <span>Help</span>
   </div>
 
   <div class="window-body">
 
-    <div class="grid">
+    <a href="retrospring.html" class="file">retrospring</a>
+    <a href="secreto.html" class="file">secreto</a>
+    <a href="curiouscat.html" class="file">curiouscat</a>
+    <a href="tellonym.html" class="file">tellonym</a>
 
-      <a href="retrospring.html" class="file">
-        <div>📁</div>
-        retrospring
-      </a>
+  </div>
 
-      <a href="secreto.html" class="file">
-        <div>📁</div>
-        secreto
-      </a>
-
-      <a href="curiouscat.html" class="file">
-        <div>📁</div>
-        curiouscat
-      </a>
-
-      <a href="tellonym.html" class="file">
-        <div>📁</div>
-        tellonym
-      </a>
-
-    </div>
-
+  <div class="status">
+    <div>4 object(s)</div>
+    <div></div>
   </div>
 
 </div>
