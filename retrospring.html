@@ -7,20 +7,36 @@
 <title>arsip-retrospring</title>
 
 <style>
-body{margin:0;font-family:-apple-system;background:#f5f5f5;}
+body{
+  margin:0;
+  font-family:-apple-system;
+  background:#f5f5f5;
+}
 
 h1{
   font-size:1em;
   font-weight:normal;
   text-align:center;
-  padding:15px;
+  margin:0;        /* tambahan kecil */
+  padding:8px 0;   /* lebih rapat */
 }
 
+/* 🔥 FIX UTAMA */
 .content{
-  padding:20px;
+  padding:0;       /* ini yang penting */
 }
 
-/* NAV */
+/* biarkan layout asli */
+#content{
+  margin:0;
+}
+
+#content img{
+  max-width:100%;
+  height:auto;
+}
+
+/* NAV tetap sama */
 .bottom-bar{
   position:fixed;
   bottom:20px;
@@ -105,17 +121,14 @@ const total = 31;
 if(page < 1) page = 1;
 if(page > total) page = total;
 
-// load isi file
 fetch(page + "retro.html")
 .then(r => r.text())
 .then(data => {
   document.getElementById("content").innerHTML = data;
 });
 
-// nomor
 document.getElementById("pageNum").innerText = page + " / " + total;
 
-// nav
 let nav = "";
 
 if(page > 1){
