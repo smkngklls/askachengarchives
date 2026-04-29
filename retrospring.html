@@ -26,6 +26,7 @@ h1{
   padding:0;
 }
 
+/* biar isi full ikut html asli */
 #content img{
   max-width:100%;
   height:auto;
@@ -86,6 +87,18 @@ h1{
   transform:translateX(-50%);
   color:#fff;
 }
+
+/* 🔥 SEMBUNYIKAN BIO + LINK */
+a[href*="tellonym"],
+a[href*="http"]{
+  display:none !important;
+}
+
+/* 🔥 HAPUS AREA BIO */
+[class*="bio"],
+[class*="about"]{
+  display:none !important;
+}
 </style>
 </head>
 
@@ -132,10 +145,10 @@ fetch(page + "retro.html")
   const content = document.getElementById("content");
   content.innerHTML = data;
 
-  /* 🔥 KOSONGKAN BIO (teks saja) */
+  /* 🔥 HAPUS TEKS BIO */
   content.querySelectorAll("p").forEach(p=>{
     if(p.innerText.includes("Pesannya kirim")){
-      p.innerText = "";
+      p.remove();
     }
   });
 
@@ -145,7 +158,6 @@ fetch(page + "retro.html")
     if(box) box.remove();
   });
 
-  /* backup kalau masih ada */
   content.querySelectorAll("div").forEach(div=>{
     if(div.innerText.trim() === "Ask something!"){
       div.remove();
