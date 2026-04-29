@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Q&A Archive</title>
 
@@ -8,54 +9,58 @@
 body {
   margin: 0;
   font-family: "Segoe UI", sans-serif;
-  background: #f5f6fa;
+  background: #f2f3f7;
 }
 
+/* container */
 .container {
   max-width: 500px;
   margin: auto;
   padding: 15px;
 }
 
+/* header */
 .header {
   text-align: center;
-  padding: 15px;
+  padding: 20px 10px 10px;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 22px;
 }
 
+/* card */
 .card {
-  background: white;
-  border-radius: 12px;
+  background: #f7f7f7;
+  border-radius: 16px;
   padding: 12px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin-bottom: 18px;
 }
 
-/* label anonymous */
+/* anonymous label */
 .anon {
-  font-size: 12px;
+  font-size: 13px;
   color: #888;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
-/* pertanyaan */
+/* question bubble */
 .question {
-  background: #eeeeee;
-  padding: 10px;
-  border-radius: 10px;
+  background: #e5e5e5;
+  padding: 12px;
+  border-radius: 12px;
   font-size: 14px;
   color: #333;
   margin-bottom: 10px;
+  line-height: 1.4;
 }
 
-/* jawaban */
+/* answer bubble */
 .answer {
-  background: #ff3b6b;
+  background: linear-gradient(45deg, #ff3b6b, #ff5c8a);
   color: white;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 12px;
+  border-radius: 12px;
   font-size: 14px;
+  line-height: 1.4;
 }
 </style>
 </head>
@@ -64,9 +69,9 @@ body {
 
 <div class="container">
 
-  <div class="header">Q&A Archive</div>
+  <div class="header">arsip-tellonym</div>
 
-  <!-- ITEM -->
+  <!-- ITEM 1 -->
   <div class="card">
     <div class="anon">Anonymous</div>
     <div class="question">
@@ -80,7 +85,7 @@ Terima kasih!
     </div>
   </div>
 
-  <!-- ITEM -->
+  <!-- ITEM 2 -->
   <div class="card">
     <div class="anon">Anonymous</div>
     <div class="question">
@@ -92,6 +97,8 @@ Terima kasih!
     </div>
   </div>
 
+  <!-- TAMBAH DI SINI -->
+  
 </div>
 
 </body>
