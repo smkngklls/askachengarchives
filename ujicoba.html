@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retrospring Archive</title>
+
+<style>
+body{
+  margin:0;
+  font-family:sans-serif;
+  background:#000;
+}
+
+/* HEADER */
+.header{
+  background:#b30000;
+  color:white;
+  padding:15px;
+  font-size:22px;
+  font-weight:bold;
+}
+
+/* PROFILE */
+.profile{
+  background:#111;
+  padding:15px;
+}
+
+.card{
+  background:#e6e6e6;
+  border-radius:12px;
+  padding:15px;
+}
+
+.name{
+  font-size:22px;
+  font-weight:bold;
+}
+
+.username{
+  color:#b30000;
+}
+
+/* BIO KOSONG */
+.bio{
+  margin-top:10px;
+  height:20px; /* tetap ada kotaknya */
+}
+
+/* ANSWER SECTION */
+.section-title{
+  background:#b30000;
+  color:white;
+  padding:12px;
+  text-align:center;
+  font-weight:bold;
+  border-radius:12px 12px 0 0;
+}
+
+.answer-box{
+  background:#e6e6e6;
+  padding:15px;
+  border-radius:0 0 12px 12px;
+}
+
+.item{
+  margin-bottom:20px;
+}
+
+.reply{
+  background:#dcdcdc;
+  padding:10px;
+  border-radius:8px;
+  margin-top:8px;
+}
+
+/* NAV BUTTON */
+.nav{
+  position:fixed;
+  bottom:20px;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  padding:0 20px;
+  box-sizing:border-box;
+}
+
+.btn{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:black;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">Retrospring</div>
+
+<div class="profile">
+  <div class="card">
+    <div class="name">ACHENG</div>
+    <div class="username">doinglaundry_</div>
+
+    <!-- BIO KOSONG (LINK SUDAH DIHAPUS TOTAL) -->
+    <div class="bio"></div>
+
+  </div>
+</div>
+
+<div class="section-title">Answers</div>
+
+<div class="answer-box" id="content">
+  Loading...
+</div>
+
+<div class="nav">
+  <a class="btn" href="1retro.html">⌂</a>
+  <a class="btn" id="nextBtn">›</a>
+</div>
+
+<script>
+let page = new URLSearchParams(window.location.search).get("p") || 1;
+page = parseInt(page);
+
+fetch(page + "retro.html")
+.then(res => res.text())
+.then(data => {
+  document.getElementById("content").innerHTML = data;
+});
+
+/* NEXT BUTTON */
+document.getElementById("nextBtn").onclick = function(){
+  let next = page + 1;
+  if(next <= 31){
+    window.location.href = "?p=" + next;
+  }
+}
+</script>
+
+</body>
+</html>
