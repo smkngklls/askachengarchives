@@ -99,23 +99,19 @@ h1{
 
 <div class="bottom-bar">
 
-<!-- HOME -->
 <a href="index.html" class="home">
 <svg viewBox="0 0 24 24" width="22">
 <path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3z"/>
 </svg>
 </a>
 
-<!-- NAV -->
 <div class="nav-buttons" id="nav"></div>
 
 </div>
 
 <script>
 
-/* =========================
-   PAGINATION
-========================= */
+/* PAGINATION */
 let params = new URLSearchParams(location.search);
 let page = parseInt(params.get("p")) || 1;
 const total = 31;
@@ -123,59 +119,46 @@ const total = 31;
 if(page < 1) page = 1;
 if(page > total) page = total;
 
-/* =========================
-   LOAD + CLEAN UI
-========================= */
+/* LOAD */
 fetch(page + "retro.html")
 .then(r => r.text())
 .then(data => {
   const content = document.getElementById("content");
   content.innerHTML = data;
 
-  /* 🔥 KOSONGKAN BIO (teks saja) */
+  /* ===== KOSONGKAN BIO ===== */
   content.querySelectorAll("p").forEach(p=>{
     if(p.innerText.includes("Pesannya kirim")){
       p.innerText = "";
     }
   });
 
-  /* 🔥 HAPUS LINK + ICON BUMI (FIX TOTAL) */
+  /* ===== HAPUS LINK TELLONYM ===== */
   content.querySelectorAll("a").forEach(a=>{
-    if(a.href.includes("tellonym") || a.innerText.toLowerCase().includes("tellonym")){
+    if(a.innerText.toLowerCase().includes("tellonym")){
       a.remove();
     }
   });
 
-  /* 🔥 HAPUS SVG YANG ADA DI DALAM LINK BIO */
-  content.querySelectorAll("a svg, a img").forEach(el=>{
-    let parentLink = el.closest("a");
-    if(parentLink && parentLink.href.includes("tellonym")){
-      parentLink.remove();
-    }
-  });
+  /* ===== 🔥 HAPUS ICON BUMI (FIX PASTI) ===== */
+  let firstSvg = content.querySelector("svg");
+  if(firstSvg){
+    firstSvg.remove();
+  }
 
-  /* 🔥 CADANGAN: HAPUS SVG YANG DEKAT TEKS KOSONG (ICON BUMI) */
-  content.querySelectorAll("svg").forEach(svg=>{
-    let parent = svg.parentElement;
-    if(parent && parent.innerText.trim() === ""){
-      svg.remove();
-    }
-  });
-
-  /* 🔥 HAPUS KOTAK ASK */
+  /* ===== HAPUS ASK BOX ===== */
   content.querySelectorAll("textarea, input").forEach(el=>{
     let box = el.closest("div");
     if(box) box.remove();
   });
 
-  /* backup */
   content.querySelectorAll("div").forEach(div=>{
     if(div.innerText.trim() === "Ask something!"){
       div.remove();
     }
   });
 
-  /* 🔥 HAPUS LOAD MORE */
+  /* ===== HAPUS LOAD MORE ===== */
   content.querySelectorAll("button").forEach(btn=>{
     if(btn.innerText.toLowerCase().includes("load")){
       btn.remove();
@@ -184,14 +167,10 @@ fetch(page + "retro.html")
 
 });
 
-/* =========================
-   PAGE NUMBER
-========================= */
+/* PAGE NUMBER */
 document.getElementById("pageNum").innerText = page + " / " + total;
 
-/* =========================
-   NAV BUTTON
-========================= */
+/* NAV */
 let nav = "";
 
 if(page > 1){
