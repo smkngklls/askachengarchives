@@ -139,9 +139,24 @@ fetch(page + "retro.html")
     }
   });
 
+  /* 🔥 HAPUS LINK BIO + ICON BUMI */
+  content.querySelectorAll("a").forEach(a=>{
+    if(a.href.includes("tellonym") || a.innerText.includes("tellonym")){
+      a.remove();
+    }
+  });
+
+  /* 🔥 HAPUS SVG KECIL SISA (ICON BUMI) */
+  content.querySelectorAll("svg").forEach(svg=>{
+    let txt = svg.parentElement.innerText.trim();
+    if(txt === "" || txt === "tellonym.me"){
+      svg.remove();
+    }
+  });
+
   /* 🔥 HAPUS KOTAK ASK */
   content.querySelectorAll("textarea, input").forEach(el=>{
-    const box = el.closest("div");
+    let box = el.closest("div");
     if(box) box.remove();
   });
 
