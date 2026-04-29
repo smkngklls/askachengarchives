@@ -6,96 +6,99 @@
 <title>askacheng.archives</title>
 
 <style>
+
+/* ===== CHICAGO FONT (CDN) ===== */
+@font-face {
+  font-family: 'Chicago';
+  src: url('https://cdn.jsdelivr.net/gh/ctrlcctrlv/chicago-font@master/chicago.woff') format('woff');
+}
+
+/* ===== BODY ===== */
 body {
   margin: 0;
-  background: #3a6ea5; /* XP-ish blue */
-  font-family: Tahoma, sans-serif;
+  background: #3c7fb1;
+  font-family: 'Chicago', Geneva, Tahoma, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  padding: 20px;
 }
 
-/* WINDOW */
+/* ===== WINDOW ===== */
 .window {
-  width: 460px;
-  max-width: 90%;     /* biar tidak mentok di HP */
-  margin: 40px auto;  /* jarak atas & tengah */
-  background: #ece9d8;
-  border: 1px solid #000;
+  width: 420px;
+  max-width: 90%;
+  background: #d6d6d6;
+  border: 2px solid #000;
+  border-radius: 6px;
 }
 
-/* TITLE BAR */
+/* ===== TITLE BAR ===== */
 .title-bar {
-  background: linear-gradient(to right, #0a246a, #3a6ea5);
-  color: white;
-  padding: 4px 6px;
-  font-size: 13px;
+  background: linear-gradient(#eeeeee, #cfcfcf);
+  padding: 4px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-}
-
-.title-bar span {
+  justify-content: center;
+  position: relative;
+  font-size: 13px;
   font-weight: bold;
 }
 
-/* MENU BAR */
-.menu {
-  background: #ece9d8;
-  border-bottom: 1px solid #aca899;
-  font-size: 12px;
-  padding: 2px 6px;
+/* ===== MAC BUTTONS ===== */
+.buttons {
+  position: absolute;
+  left: 6px;
 }
 
-.menu span {
-  margin-right: 12px;
+.btn {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 4px;
 }
 
-/* BODY */
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+
+/* ===== BODY CONTENT ===== */
 .window-body {
-  background: white;
-  padding: 6px;
+  background: #fff;
+  padding: 10px;
 }
 
-/* FILE LIST */
+/* ===== FILE LIST ===== */
 .file {
   display: flex;
   align-items: center;
-  padding: 4px 6px;
+  padding: 6px;
   font-size: 13px;
   text-decoration: none;
   color: black;
 }
 
-/* FOLDER ICON */
+/* ICON */
 .file::before {
-  content: "";
-  width: 16px;
-  height: 12px;
-  background: #f4d36b;
-  border: 1px solid #caa24a;
+  content: "📁";
   margin-right: 8px;
 }
 
-/* HOVER */
+/* HOVER (MAC STYLE SELECT) */
 .file:hover {
-  background: #316ac5;
+  background: #3875d7;
   color: white;
 }
 
-/* STATUS BAR */
+/* ===== STATUS BAR ===== */
 .status {
-  display: flex;
-  border-top: 1px solid #aca899;
   font-size: 11px;
+  padding: 4px 6px;
+  background: #e0e0e0;
+  border-top: 1px solid #aaa;
 }
 
-.status div {
-  flex: 1;
-  padding: 2px 6px;
-}
 </style>
 </head>
 
@@ -104,31 +107,23 @@ body {
 <div class="window">
 
   <div class="title-bar">
-    <span>askacheng.archives</span>
-    <div>— □ ✕</div>
-  </div>
-
-  <div class="menu">
-    <span>File</span>
-    <span>Edit</span>
-    <span>View</span>
-    <span>Favorites</span>
-    <span>Tools</span>
-    <span>Help</span>
+    <div class="buttons">
+      <span class="btn red"></span>
+      <span class="btn yellow"></span>
+      <span class="btn green"></span>
+    </div>
+    askacheng.archives
   </div>
 
   <div class="window-body">
-
     <a href="retrospring.html" class="file">Retrospring</a>
     <a href="secreto.html" class="file">Secreto</a>
-    <a href="cc.html" class="file">CuriousCat</a>
+    <a href="curiouscat.html" class="file">CuriousCat</a>
     <a href="tellonym.html" class="file">Tellonym</a>
-
   </div>
 
   <div class="status">
-    <div>4 object(s)</div>
-    <div></div>
+    4 items
   </div>
 
 </div>
